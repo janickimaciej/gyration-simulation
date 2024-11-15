@@ -29,5 +29,5 @@ void main()
 	float reflectionViewCos = dot(reflectionVector, viewVector);
 	brightness += reflectionViewCos > 0 ? specular * pow(reflectionViewCos, shininess) : 0;
 
-	outColor = vec4(brightness * color, 1);
+	outColor = vec4(brightness * color, 0.5f);
 }

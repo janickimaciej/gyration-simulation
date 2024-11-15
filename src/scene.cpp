@@ -63,14 +63,14 @@ void Scene::render() const
 
 	m_camera.use();
 
+	if (m_renderDiagonal)
+	{
+		m_diagonal.render();
+	}
 	if (m_renderCube)
 	{
 		m_cube.render();
 		m_hinge.render();
-	}
-	if (m_renderDiagonal)
-	{
-		m_diagonal.render();
 	}
 	if (m_renderTrajectory)
 	{
