@@ -76,7 +76,8 @@ void ControlPanel::update()
 		[this] (float angVelocity0) { m_simulation.setAngVelocity0(angVelocity0); },
 		"angular velocity",
 		0.0f,
-		"%.0f"
+		"%.0f",
+		1.0f
 	);
 
 	updateIntValue
