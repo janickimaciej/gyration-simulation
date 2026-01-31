@@ -1,12 +1,13 @@
 #include "plane.hpp"
 
+#include "shaderPrograms.hpp"
+
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
 #include <array>
 
-Plane::Plane(const ShaderProgram& shaderProgram) :
-	m_shaderProgram{shaderProgram}
+Plane::Plane()
 {
 	createVBO();
 	createEBO();
@@ -22,7 +23,7 @@ Plane::~Plane()
 
 void Plane::render() const
 {
-	m_shaderProgram.use();
+	ShaderPrograms::plane->use();
 	glBindVertexArray(m_VAO);
 	glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(12), GL_UNSIGNED_INT, nullptr);
 	glBindVertexArray(0);

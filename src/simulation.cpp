@@ -47,7 +47,7 @@ void Simulation::start()
 	{
 		return;
 	}
-	
+
 	glm::mat3 orientationMatrix =
 	{
 		std::cos(m_angle0), std::sin(m_angle0), 0,

@@ -168,8 +168,8 @@
     <ClCompile Include="src\box.cpp" />
     <ClCompile Include="src\camera\camera.cpp" />
     <ClCompile Include="src\camera\perspectiveCamera.cpp" />
-    <ClCompile Include="src\guis\controlPanel.cpp" />
-    <ClCompile Include="src\guis\gui.cpp" />
+    <ClCompile Include="src\gui\leftPanel.cpp" />
+    <ClCompile Include="src\gui\gui.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mesh.cpp" />
     <ClCompile Include="src\model.cpp" />
@@ -177,6 +177,7 @@
     <ClCompile Include="src\rungeKutta.cpp" />
     <ClCompile Include="src\scene.cpp" />
     <ClCompile Include="src\shaderProgram.cpp" />
+    <ClCompile Include="src\shaderPrograms.cpp" />
     <ClCompile Include="src\simulation.cpp" />
     <ClCompile Include="src\state.cpp" />
     <ClCompile Include="src\polylineMesh.cpp" />
@@ -198,14 +199,15 @@
     <ClInclude Include="src\box.hpp" />
     <ClInclude Include="src\camera\camera.hpp" />
     <ClInclude Include="src\camera\perspectiveCamera.hpp" />
-    <ClInclude Include="src\guis\controlPanel.hpp" />
-    <ClInclude Include="src\guis\gui.hpp" />
+    <ClInclude Include="src\gui\leftPanel.hpp" />
+    <ClInclude Include="src\gui\gui.hpp" />
     <ClInclude Include="src\mesh.hpp" />
     <ClInclude Include="src\model.hpp" />
     <ClInclude Include="src\plane.hpp" />
     <ClInclude Include="src\rungeKutta.hpp" />
     <ClInclude Include="src\scene.hpp" />
     <ClInclude Include="src\shaderProgram.hpp" />
+    <ClInclude Include="src\shaderPrograms.hpp" />
     <ClInclude Include="src\simulation.hpp" />
     <ClInclude Include="src\state.hpp" />
     <ClInclude Include="src\polylineMesh.hpp" />

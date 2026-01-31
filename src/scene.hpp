@@ -4,7 +4,6 @@
 #include "camera/perspectiveCamera.hpp"
 #include "plane.hpp"
 #include "polyline.hpp"
-#include "shaderProgram.hpp"
 #include "simulation.hpp"
 
 #include <glm/glm.hpp>
@@ -16,7 +15,7 @@ public:
 	Scene(const glm::ivec2& viewportSize);
 	void update();
 	void render() const;
-	void updateWindowSize();
+	void updateViewportSize();
 
 	void addPitchCamera(float pitchRad);
 	void addYawCamera(float yawRad);
@@ -38,19 +37,15 @@ public:
 	Simulation& getSimulation();
 
 private:
-	ShaderProgram m_meshShaderProgram{"src/shaders/meshVS.glsl", "src/shaders/meshFS.glsl"};
-	ShaderProgram m_polylineShaderProgram{"src/shaders/polylineVS.glsl",
-		"src/shaders/polylineFS.glsl"};
-	ShaderProgram m_planeShaderProgram{"src/shaders/planeVS.glsl", "src/shaders/planeFS.glsl"};
-	glm::ivec2 m_viewportSize{};
+	const glm::ivec2& m_viewportSize{};
 	PerspectiveCamera m_camera;
 
 	Box m_cube;
 	Box m_hinge;
 	Polyline m_diagonal;
 	Polyline m_trajectory;
-	Polyline m_gravity;
-	Plane m_plane{m_planeShaderProgram};
+	Polyline m_gravityVector;
+	Plane m_plane{};
 
 	bool m_renderCube = true;
 	bool m_renderDiagonal = false;

@@ -1,16 +1,13 @@
 #include "camera/camera.hpp"
 
+#include "shaderPrograms.hpp"
+
 #include <glm/gtc/constants.hpp>
 
-Camera::Camera(float aspectRatio, float nearPlane, float farPlane,
-	const ShaderProgram& meshShaderProgram, const ShaderProgram& polylineShaderProgram,
-	const ShaderProgram& planeShaderProgram) :
+Camera::Camera(float aspectRatio, float nearPlane, float farPlane) :
 	m_aspectRatio{aspectRatio},
 	m_nearPlane{nearPlane},
-	m_farPlane{farPlane},
-	m_meshShaderProgram{meshShaderProgram},
-	m_polylineShaderProgram{polylineShaderProgram},
-	m_planeShaderProgram{planeShaderProgram}
+	m_farPlane{farPlane}
 {
 	updateViewMatrix();
 }
@@ -110,13 +107,13 @@ glm::vec3 Camera::getPos() const
 
 void Camera::updateShaders() const
 {
-	m_meshShaderProgram.use();
-	m_meshShaderProgram.setUniform("projectionViewMatrix", getMatrix());
-	m_meshShaderProgram.setUniform("cameraPos", getPos());
+	ShaderPrograms::mesh->use();
+	ShaderPrograms::mesh->setUniform("projectionViewMatrix", getMatrix());
+	ShaderPrograms::mesh->setUniform("cameraPos", getPos());
 
-	m_polylineShaderProgram.use();
-	m_polylineShaderProgram.setUniform("projectionViewMatrix", getMatrix());
+	ShaderPrograms::polyline->use();
+	ShaderPrograms::polyline->setUniform("projectionViewMatrix", getMatrix());
 
-	m_planeShaderProgram.use();
-	m_planeShaderProgram.setUniform("projectionViewMatrix", getMatrix());
+	ShaderPrograms::plane->use();
+	ShaderPrograms::plane->setUniform("projectionViewMatrix", getMatrix());
 }

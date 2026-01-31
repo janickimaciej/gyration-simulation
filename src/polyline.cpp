@@ -1,7 +1,8 @@
 #include "polyline.hpp"
 
-Polyline::Polyline(const ShaderProgram& shaderProgram, const glm::vec3& color) :
-	m_shaderProgram{shaderProgram},
+#include "shaderPrograms.hpp"
+
+Polyline::Polyline(const glm::vec3& color) :
 	m_polyline{{}},
 	m_color{color}
 { }
@@ -19,6 +20,6 @@ void Polyline::render() const
 
 void Polyline::updateShaders() const
 {
-	m_shaderProgram.use();
-	m_shaderProgram.setUniform("color", m_color);
+	ShaderPrograms::polyline->use();
+	ShaderPrograms::polyline->setUniform("color", m_color);
 }

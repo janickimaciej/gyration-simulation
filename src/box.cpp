@@ -1,10 +1,11 @@
 #include "box.hpp"
 
+#include "shaderPrograms.hpp"
+
 #include <cmath>
 #include <cstddef>
 
-Box::Box(const ShaderProgram& shaderProgram, const glm::vec3& color) :
-	m_shaderProgram{shaderProgram},
+Box::Box(const glm::vec3& color) :
 	m_color{color}
 {
 	std::vector<Mesh::Vertex> vertices(24);
@@ -82,7 +83,7 @@ void Box::render() const
 
 void Box::updateShaders() const
 {
-	m_shaderProgram.use();
-	m_shaderProgram.setUniform("modelMatrix", getMatrix());
-	m_shaderProgram.setUniform("color", m_color);
+	ShaderPrograms::mesh->use();
+	ShaderPrograms::mesh->setUniform("modelMatrix", getMatrix());
+	ShaderPrograms::mesh->setUniform("color", m_color);
 }

@@ -20,13 +20,12 @@ static constexpr glm::vec3 gravityColor = {1.0f, 0, 0};
 
 Scene::Scene(const glm::ivec2& viewportSize) :
 	m_viewportSize{viewportSize},
-	m_camera{fovYDeg, static_cast<float>(viewportSize.x) / viewportSize.y, nearPlane, farPlane,
-		m_meshShaderProgram, m_polylineShaderProgram, m_planeShaderProgram},
-	m_cube{m_meshShaderProgram, cubeColor},
-	m_hinge{m_meshShaderProgram, hingeColor},
-	m_diagonal{m_polylineShaderProgram, diagonalColor},
-	m_trajectory{m_polylineShaderProgram, trajectoryColor},
-	m_gravity{m_polylineShaderProgram, gravityColor}
+	m_camera{fovYDeg, static_cast<float>(viewportSize.x) / viewportSize.y, nearPlane, farPlane},
+	m_cube{cubeColor},
+	m_hinge{hingeColor},
+	m_diagonal{diagonalColor},
+	m_trajectory{trajectoryColor},
+	m_gravityVector{gravityColor}
 {
 	m_hinge.setPosition({-hingeSide / 2.0f, -hingeSide / 2.0f, -hingeSide / 2.0f});
 	m_hinge.setScale({hingeSide, hingeSide, hingeSide});
@@ -42,7 +41,7 @@ void Scene::update()
 	m_diagonal.update({{0, 0, 0}, diagonal});
 	m_trajectory.update(m_simulation.getTrajectory());
 	glm::vec3 centerOfMass = diagonal / 2.0f;
-	m_gravity.update(
+	m_gravityVector.update(
 		{
 			centerOfMass,
 			centerOfMass + glm::vec3{0, -1.5f, 0},
@@ -67,6 +66,10 @@ void Scene::render() const
 	{
 		m_diagonal.render();
 	}
+	if (m_renderGravityVector)
+	{
+		m_gravityVector.render();
+	}
 	if (m_renderCube)
 	{
 		m_cube.render();
@@ -76,17 +79,13 @@ void Scene::render() const
 	{
 		m_trajectory.render();
 	}
-	if (m_renderGravityVector)
-	{
-		m_gravity.render();
-	}
 	if (m_renderPlane)
 	{
 		m_plane.render();
 	}
 }
 
-void Scene::updateWindowSize()
+void Scene::updateViewportSize()
 {
 	setAspectRatio(static_cast<float>(m_viewportSize.x) / m_viewportSize.y);
 }
