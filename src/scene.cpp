@@ -6,9 +6,9 @@
 
 #include <cmath>
 
-static constexpr float fovYDeg = 60.0f;
 static constexpr float nearPlane = 0.1f;
 static constexpr float farPlane = 1000.0f;
+static constexpr float fovYDeg = 60.0f;
 
 static constexpr glm::vec3 cubeColor = {0, 0.5f, 1.0f};
 static constexpr glm::vec3 hingeColor = {1.0f, 0, 0};
@@ -16,18 +16,23 @@ static constexpr float hingeSide = 0.05f;
 
 static constexpr glm::vec3 diagonalColor = {0, 0.5f, 1.0f};
 static constexpr glm::vec3 trajectoryColor = {1.0f, 1.0f, 1.0f};
-static constexpr glm::vec3 gravityColor = {1.0f, 0, 0};
+static constexpr glm::vec3 gravityVectorColor = {1.0f, 0, 0};
 
 Scene::Scene(const glm::ivec2& viewportSize) :
-	m_viewportSize{viewportSize},
-	m_camera{fovYDeg, static_cast<float>(viewportSize.x) / viewportSize.y, nearPlane, farPlane},
+	m_camera{viewportSize, nearPlane, farPlane, fovYDeg},
 	m_cube{cubeColor},
 	m_hinge{hingeColor},
 	m_diagonal{diagonalColor},
 	m_trajectory{trajectoryColor},
-	m_gravityVector{gravityColor}
+	m_gravityVector{gravityVectorColor}
 {
-	m_hinge.setPosition({-hingeSide / 2.0f, -hingeSide / 2.0f, -hingeSide / 2.0f});
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_MULTISAMPLE);
+
+	m_hinge.setPos({-hingeSide / 2.0f, -hingeSide / 2.0f, -hingeSide / 2.0f});
 	m_hinge.setScale({hingeSide, hingeSide, hingeSide});
 }
 
@@ -87,7 +92,7 @@ void Scene::render() const
 
 void Scene::updateViewportSize()
 {
-	setAspectRatio(static_cast<float>(m_viewportSize.x) / m_viewportSize.y);
+	m_camera.updateViewportSize();
 }
 
 void Scene::addPitchCamera(float pitchRad)
@@ -168,9 +173,4 @@ void Scene::setRenderPlane(bool renderPlane)
 Simulation& Scene::getSimulation()
 {
 	return m_simulation;
-}
-
-void Scene::setAspectRatio(float aspectRatio)
-{
-	m_camera.setAspectRatio(aspectRatio);
 }

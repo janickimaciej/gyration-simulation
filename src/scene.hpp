@@ -37,7 +37,6 @@ public:
 	Simulation& getSimulation();
 
 private:
-	const glm::ivec2& m_viewportSize{};
 	PerspectiveCamera m_camera;
 
 	Box m_cube;
@@ -54,6 +53,4 @@ private:
 	bool m_renderPlane = true;
 
 	Simulation m_simulation{};
-
-	void setAspectRatio(float aspectRatio);
 };
