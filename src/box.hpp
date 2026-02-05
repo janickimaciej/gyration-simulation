@@ -10,6 +10,8 @@ class Box : public Model
 {
 public:
 	Box(const glm::vec3& color);
+	virtual ~Box() = default;
+
 	virtual void render() const override;
 
 private:

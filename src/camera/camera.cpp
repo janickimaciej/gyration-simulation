@@ -4,6 +4,8 @@
 
 #include <glm/gtc/constants.hpp>
 
+#include <cmath>
+
 Camera::Camera(const glm::ivec2& viewportSize, float nearPlane, float farPlane) :
 	m_viewportSize{viewportSize},
 	m_nearPlane{nearPlane},
