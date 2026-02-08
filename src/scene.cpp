@@ -8,7 +8,7 @@
 
 static constexpr float nearPlane = 0.1f;
 static constexpr float farPlane = 1000.0f;
-static constexpr float fovYDeg = 60.0f;
+static constexpr float initFOVYDeg = 60.0f;
 
 static constexpr glm::vec3 cubeColor = {0, 0.5f, 1.0f};
 static constexpr glm::vec3 hingeColor = {1.0f, 0, 0};
@@ -19,7 +19,7 @@ static constexpr glm::vec3 trajectoryColor = {1.0f, 1.0f, 1.0f};
 static constexpr glm::vec3 gravityVectorColor = {1.0f, 0, 0};
 
 Scene::Scene(const glm::ivec2& viewportSize) :
-	m_camera{viewportSize, nearPlane, farPlane, fovYDeg},
+	m_camera{viewportSize, nearPlane, farPlane, initFOVYDeg},
 	m_cube{cubeColor},
 	m_hinge{hingeColor},
 	m_diagonal{diagonalColor},
